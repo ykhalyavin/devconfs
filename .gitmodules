@@ -1,0 +1,30 @@
+[submodule "_vim/bundle/gundo"]
+	path = _vim/bundle/gundo
+	url = http://github.com/sjl/gundo.vim.git
+[submodule "_vim/bundle/taglist"]
+	path = _vim/bundle/taglist
+	url = https://github.com/vim-scripts/taglist.vim.git
+[submodule "_vim/bundle/vcscommand"]
+	path = _vim/bundle/vcscommand
+	url = https://github.com/vim-scripts/vcscommand.vim
+[submodule "_vim/bundle/bufkill"]
+	path = _vim/bundle/bufkill
+	url = https://github.com/vim-scripts/bufkill.vim
+[submodule "_vim/bundle/quickbuf"]
+	path = _vim/bundle/quickbuf
+	url = https://github.com/vim-scripts/QuickBuf
+[submodule "_vim/bundle/nerdcommenter"]
+	path = _vim/bundle/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter
+[submodule "_vim/bundle/nerdtree"]
+	path = _vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree
+[submodule "_vim/bundle/command-t"]
+	path = _vim/bundle/command-t
+	url = https://github.com/wincent/Command-T
+[submodule "_vim/git/pathogen"]
+	path = _vim/git/pathogen
+	url = https://github.com/vim-scripts/pathogen.vim.git
+[submodule "_vim/bundle/conque"]
+	path = _vim/bundle/conque
+	url = https://github.com/vim-scripts/Conque-Shell

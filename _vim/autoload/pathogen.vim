@@ -1,1 +1,1 @@
-../git/vim-pathogen/autoload/pathogen.vim
+../git/pathogen/plugin/pathogen.vim
