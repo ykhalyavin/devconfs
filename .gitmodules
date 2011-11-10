@@ -28,3 +28,6 @@
 [submodule "_vim/bundle/conque"]
 	path = _vim/bundle/conque
 	url = https://github.com/vim-scripts/Conque-Shell
+[submodule "_vim/bundle/grep"]
+	path = _vim/bundle/grep
+	url = https://github.com/vim-scripts/grep.vim.git
