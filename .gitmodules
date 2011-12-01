@@ -31,3 +31,6 @@
 [submodule "_vim/bundle/grep"]
 	path = _vim/bundle/grep
 	url = https://github.com/vim-scripts/grep.vim.git
+[submodule "_vim/bundle/smart-home-key"]
+	path = _vim/bundle/smart-home-key
+	url = https://github.com/vim-scripts/Smart-Home-Key.git

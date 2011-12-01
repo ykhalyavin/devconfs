@@ -13,6 +13,7 @@
 
     filetype plugin indent on
 
+    set fencs=utf8,cp1251 " порядок перебора кодировок при открытии файла
     set autochdir " always switch to the current file directory
     set nobackup
     set hidden " you can change buffers without saving
@@ -30,6 +31,25 @@
     set shell       =/bin/bash
     set wcm         =<Tab>
     set pastetoggle =<F3>  " Переключение режима paste по F3
+
+    if v:version >= 703
+        " включим опцию persistent undo
+        set undofile
+
+        " сделаем так, чтобы файлы undo появлялись не в текущей директории,
+        " а в нашей
+        if has('win32') || has('win64')
+            let s:undodir=$VIM.'/undofiles'
+        else
+            let s:undodir=$HOME.'/.vim/undofiles'
+        endif
+        let &undodir=s:undodir
+
+        " если каталог не существует, создадим его рекурсивно
+        if !isdirectory(s:undodir)
+            call mkdir(s:undodir, 'p', 0700)
+        endif
+    endif
 " }
 
 " Vim UI {
@@ -77,11 +97,12 @@ endif
 if has("gui_running")
     set guioptions =afgitef
     set guifont    =Liberation\ Mono\ 10
-    set lines      =75
-    set columns    =185
+    "set lines      =75
+    "set columns    =185
     set background =dark
 
-    colorscheme github
+    "colorscheme github
+    colorscheme slate
 endif
 
 autocmd BufEnter * :syntax sync fromstart
@@ -137,9 +158,15 @@ nmap <PageDown> <C-D><C-D>
 imap <PageDown> <C-O><C-D><C-O><C-D>
 " Форматирование по ближайшей скобке
 imap <C-L> <C-O>=%
-" 'умный' Home
-nmap <Home> ^
-imap <Home> <Esc>I
+" 'умный' Home/End
+nnoremap <silent> <Home> :SmartHomeKey<CR>
+nnoremap <silent> <End> :SmartEndKey<CR> 
+nnoremap <silent> ^ :SmartHomeKey<CR>
+nnoremap <silent> $ :SmartEndKey<CR>
+inoremap <silent> <Home> <C-O>:SmartHomeKey<CR>
+inoremap <silent> <End> <C-O>:SmartEndKey<CR>
+"nmap <Home> ^
+"imap <Home> <Esc>I
 " Format text
 imap <C-J> <C-O>gqap
 nmap <C-J>      gqap
@@ -170,6 +197,8 @@ let NERDTreeShowBookmarks = 1
 let g:ConqueTerm_InsertOnEnter = 1
 " Keep updating terminal buffer
 let g:ConqueTerm_ReadUnfocused = 1
+" Enable <C-w> in insert mode
+let g:ConqueTerm_CWInsert = 1
 
 " TagList: Не расширять окошко
 let Tlist_Inc_Winwidth = 0
@@ -404,8 +433,71 @@ cab restoresession call RestoreSession()
 "au BufWritePost * silent call cursor(au_line, au_col)
 
 
-autocmd BufReadPost * :call SetAgavaSettings()
-cab SAS call SetAgavaSettings()
+"autocmd BufReadPost * :call SetAgavaSettings()
+"cab SAS call SetAgavaSettings()
+
+
+function PTest()
+perl << EOF
+
+EOF
+endfunction
+
+autocmd BufReadPost * :call SetRossSettings()
+"cab SRS call SetRossSettings()
+function SetRossSettings()
+    " Temporary buffer, ignore
+    if expand('%') == ''
+        return
+    endif
+
+    if &ft =~ 'git'
+        return
+    endif
+
+    set wildignore-=system_source
+    set wildignore+=*.d
+
+    if getcwd() =~ "TMS320DM365"
+        let $p = substitute(getcwd(), '/TMS320DM365/.*', '/TMS320DM365', 'g')
+        let $c = $p . "/source/programs"
+        " Для плагина 'CommandT' -- игнорируем данные директории
+        set wildignore+=system_source
+    elseif getcwd() =~ "snd_time_daemon"
+        let $p = substitute(getcwd(), '/snd_time_daemon/.*', '/snd_time_daemon', 'g')
+        let $c = $p
+    elseif getcwd() =~ "orinoko-install"
+        let $p = substitute(getcwd(), '/orinoko-install/.*', '/orinoko-install', 'g')
+        let $c = $p
+    elseif getcwd() =~ "ini_client_test"
+        let $p = substitute(getcwd(), '/ini_client_test/.*', '/ini_client_test', 'g')
+        let $c = $p
+    elseif getcwd() =~ "cicada-r2p-server"
+        let $p = substitute(getcwd(), '/cicada-r2p-server/.*', '/cicada-r2p-server', 'g')
+        let $c = $p
+    elseif getcwd() =~ "axis_lib"
+        let $p = substitute(getcwd(), '/axis_lib/.*', '/axis_lib', 'g')
+        let $c = $p
+    elseif getcwd() =~ "dispatcher_lib"
+        let $p = substitute(getcwd(), '/dispatcher_lib/.*', '/dispatcher_lib', 'g')
+        let $c = $p
+    else
+        return
+    endif
+
+    " Устанавливаем правильную кодировку, если необходимо
+    "if &fileencoding != "cp1251"
+        "execute "e ++enc=cp1251"
+    "endif
+
+    "set tags=$p/tags
+    nnoremap <silent> <leader>t :CommandT $c<cr>
+
+    " ROSS использует табы, не преобразовываем табуляцию в пробелы
+    set noet
+    syntax on
+endfunction
+
 function SetAgavaSettings()
     " Temporary buffer, ignore
     if expand('%') == ''
