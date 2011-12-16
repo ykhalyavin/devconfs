@@ -43,3 +43,6 @@
 [submodule "_vim/bundle/omnicppcomplete"]
 	path = _vim/bundle/omnicppcomplete
 	url = https://github.com/vim-scripts/OmniCppComplete.git
+[submodule "_vim/bundle/vim-railscasts-theme"]
+	path = _vim/bundle/vim-railscasts-theme
+	url = https://github.com/jpo/vim-railscasts-theme.git
