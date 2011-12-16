@@ -24,7 +24,7 @@ set wildmode    =longest,list,full
 set wildignore  =*.o,*.obj,*.bak,*.exe,*.swp,*.a,*.svn,*.git
 set backspace   =indent,eol,start whichwrap+=<,>,[,] " use backspace instead of "x"
 set laststatus  =2        " всегда отображать линию статуса
-set history     =500      " сохраняем 500 линий посиковой истории
+set history     =500      " сохраняем 500 линий поисковой истории
 set browsedir   =buffer
 set display     =lastline " не отображать в последней строке '@@@@@'
 set shell       =/bin/bash
