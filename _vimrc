@@ -142,10 +142,11 @@ imap <PageDown> <C-O><C-D><C-O><C-D>
 imap <C-L> <C-O>=%
 
 " 'умный' Home/End
-nnoremap <silent> <Home> :SmartHomeKey<CR>
-nnoremap <silent> <End> :SmartEndKey<CR>
-inoremap <silent> <Home> <C-O>:SmartHomeKey<CR>
-inoremap <silent> <End> <C-O>:SmartEndKey<CR>
+noremap <expr> <Home> (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^')
+noremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_')
+vnoremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$h' : 'g_')
+imap <Home> <C-o><Home>
+imap <End> <C-o><End>
 
 " комментируем/раскомментируем строки по Ctrl-C
 imap <C-C> <Esc>:call NERDComment(0, "invert")<CR>a
