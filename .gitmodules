@@ -37,3 +37,6 @@
 [submodule "_vim/bundle/supertab"]
 	path = _vim/bundle/supertab
 	url = https://github.com/ervandew/supertab.git
+[submodule "_vim/bundle/vim-lucius-theme"]
+	path = _vim/bundle/vim-lucius-theme
+	url = https://github.com/vim-scripts/Lucius.git
