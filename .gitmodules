@@ -34,3 +34,6 @@
 [submodule "_vim/bundle/smart-home-key"]
 	path = _vim/bundle/smart-home-key
 	url = https://github.com/vim-scripts/Smart-Home-Key.git
+[submodule "_vim/bundle/supertab"]
+	path = _vim/bundle/supertab
+	url = https://github.com/ervandew/supertab.git
