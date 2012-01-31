@@ -182,7 +182,7 @@ let Tlist_Show_One_File      = 1 " Показывать тэги только д
 let Tlist_Enable_Fold_Column = 0 " no fold column (only showing one file)
 let Tlist_Use_SingleClick    = 1 " переходить на тэг в один клик
 let Tlist_Compact_Format     = 1 " Не показывать лишней информации
-let Tlist_Sort_Type          = "name"
+let g:Tlist_Sort_Type        = "name"
 
 source $HOME/.vim/settings/binary.vim
 source $HOME/.vim/settings/latex.vim
