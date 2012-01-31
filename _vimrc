@@ -164,6 +164,8 @@ nmap <F4>      :BD<CR>
 
 nnoremap <leader>p :NERDTreeToggle<cr>
 let NERDTreeShowBookmarks = 1 " NERDTree показывает закладки
+let NERDTreeDirArrows = 0 " отображать '+~' вместо utf-8 стрелочек
+let NERDTreeMinimalUI = 1 " убрать все лишнее (подсказка помощи, надписи и т.д.)
 
 let g:ConqueTerm_InsertOnEnter = 1 " при входе в буфер, вкл. режим Insert
 let g:ConqueTerm_ReadUnfocused = 1 " обновлять буфер, если мы не в нем
