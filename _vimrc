@@ -11,7 +11,7 @@ call pathogen#helptags()
 filetype plugin indent on
 
 set fencs=utf8,cp1251 " порядок перебора кодировок при открытии файла
-set nobackup
+set nobackup    " не создавать бэкап
 set hidden      " переключаем измененные буферы без предварительного сохранения
 set wildmenu    " используем допол
 set noswapfile  " не используем swap файлы, чтобы н езасорять память
@@ -61,7 +61,7 @@ set matchpairs+=<:>
 set matchtime=2   " подсвечиваем парные скобки 2 секунды
 
 set shortmess+=I  " не показывать заставку про помощь уганде при старте vim
-set scrolloff=3   " начинать прокрутку текста, когда до края остается 3 линии
+set scrolloff =3  " начинать прокрутку текста, когда до края остается 3 линии
 set sidescroll=5  " The minimal number of columns to scroll horizontally.
                   " Used only when the 'wrap' option is off.
 
