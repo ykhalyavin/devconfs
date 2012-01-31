@@ -154,8 +154,8 @@ nmap <C-C>      :call NERDComment(0, "invert")<CR>
 vmap <C-C>      :call NERDComment(0, "invert")<CR>
 
 " сохранение текущего буфера
-imap <unique> <F2> <Esc>:w<CR>a
-nmap <unique> <F2>      :w<CR>
+imap <unique> <C-S> <Esc>:w<CR>a
+nmap <unique> <C-S>      :w<CR>
 
 " закрываем текущий буфер, не закрывая окна
 imap <F4> <Esc>:BD<CR>a
