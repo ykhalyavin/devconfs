@@ -1,7 +1,7 @@
 autocmd BufReadPost * :call SetRossSettings()
 cab SRS call SetRossSettings()
 
-function SetRossSettings()
+function! SetRossSettings()
     " Temporary buffer, ignore
     if expand('%') == ''
         return
@@ -15,7 +15,19 @@ function SetRossSettings()
         let $p = substitute(getcwd(), '/TMS320DM365/.*', '/TMS320DM365', 'g')
         let $c = $p . "/source/programs"
         " Для плагина 'CommandT' -- игнорируем данные директории
-        set wildignore+=system_source
+        set wildignore+=system_source,target,.include,.lib,opt
+        set wildignore+=*.o,*.obj,*.so,*.d,*~,*.a
+    elseif getcwd() =~ "TMS320DM355"
+        let $p = substitute(getcwd(), '/TMS320DM355/.*', '/TMS320DM355', 'g')
+        let $c = $p . "/source/programs"
+        " Для плагина 'CommandT' -- игнорируем данные директории
+        set wildignore+=system_source,target,.include,.lib,opt
+        set wildignore+=*.o,*.obj,*.so,*.d,*~,*.a
+
+        let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\.git$\|\.hg$\|\.svn$\|target$\|system_source\|include$\|lib$',
+            \ 'file': '\.d$\|\.so$\|\.o$\|*.obj\|*.a',
+            \ }
     elseif getcwd() =~ "snd_time_daemon"
         let $p = substitute(getcwd(), '/snd_time_daemon/.*', '/snd_time_daemon', 'g')
         let $c = $p
@@ -28,6 +40,9 @@ function SetRossSettings()
     elseif getcwd() =~ "cicada-r2p-server"
         let $p = substitute(getcwd(), '/cicada-r2p-server/.*', '/cicada-r2p-server', 'g')
         let $c = $p
+    elseif getcwd() =~ "download-client-test"
+        let $p = substitute(getcwd(), '/download-client-test/.*', '/download-client-test', 'g')
+        let $c = $p
     elseif getcwd() =~ "axis_lib"
         let $p = substitute(getcwd(), '/axis_lib/.*', '/axis_lib', 'g')
         let $c = $p
@@ -38,8 +53,8 @@ function SetRossSettings()
         return
     endif
 
-    set wildignore-=system_source
-    set wildignore+=*.d
+    "set wildignore-=system_source
+    "set wildignore+=*.d
 
     " Устанавливаем правильную кодировку, если необходимо
     "if &fileencoding != "cp1251"
