@@ -150,7 +150,7 @@ noremap <expr> <Home> (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^')
 noremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_')
 vnoremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$h' : 'g_')
 imap <Home> <C-o><Home><C-o>i
-imap <End> <C-o><End><C-o>a
+imap <End> <C-o><End><C-o>a<C-o>a
 
 " комментируем/раскомментируем строки по Ctrl-C
 imap <C-C> <Esc>:call NERDComment(0, "invert")<CR>a
