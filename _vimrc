@@ -105,6 +105,9 @@ au BufNewFile  *.c     0r /home/delphi/.vim/templates/c
 
 au BufRead,BufNewFile  *.c,*.h set formatoptions=ql cindent
 
+" automatically open and close the popup menu / preview window
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+
 au FileType python set omnifunc=pythoncomplete#Complete
 au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 au FileType html set omnifunc=htmlcomplete#CompleteTags
