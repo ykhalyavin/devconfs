@@ -190,4 +190,5 @@ let g:Tlist_Sort_Type        = "name"
 source $HOME/.vim/settings/binary.vim
 source $HOME/.vim/settings/latex.vim
 source $HOME/.vim/settings/perl.vim
-source $HOME/.vim/settings/ross.vim
+source $HOME/.vim/settings/python.vim
+source $HOME/.vim/settings/agru.vim
