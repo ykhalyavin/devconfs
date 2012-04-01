@@ -1,0 +1,289 @@
+# $Id: .zshrc,v 1.40 2004/06/05 11:28:13 han Exp $
+# Below are the color init strings for the basic file types. A color init
+# string consists of one or more of the following numeric codes:
+# Attribute codes:        00=none  01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# Text color codes:       30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+# Background color codes: 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+#cat warn.txt|grep -v '#'
+[[ -z "$terminfo[kf1]" ]] || bindkey -M emacs "$terminfo[kf1]" run-help
+# sntpservers: http://www.eecis.udel.edu/~mills/ntp/clock1a.html
+export QTDIR=/usr/share/qt
+#export LANG=C
+export pager='less -i'
+export LESS='-MM -q -i -X'
+
+export JAVA_HOME='/usr/lib/jvm/java-6-sun/'
+#export ETHERBOX_CONTROL=$HOME/cvs/etherbox/control
+export ETHERBOX_CONTROL=$HOME/git/sensor-host
+export CLOOP_RESISTOR='9.959'
+#export GIT_PAGER=cat
+# Global aliases for cd, ls, etc
+alias -g M='~/docs/muz/'
+alias -g ADOCS='~/docs/docs/avr/'
+alias -g FTP='~ftp/'
+
+#alias -s {avi,mpeg,mpg,mov,m2v,AVI}=mplayer
+
+alias mgcc='/home/delphi/docs/work/openwrt/kamikaze/trunk/staging_dir_mipsel/bin/mipsel-linux-uclibc-gcc'
+#alias mgcc='/home/delphi/docs/work/openwrt/kamikaze/trunk-20070622/staging_dir_mipsel/bin/mipsel-linux-uclibc-gcc'
+
+alias cp2koi='iconv -c -f cp1251 -t koi8-r'
+alias koi2cp='iconv -c -f koi8-r -t cp1251'
+alias flv2avi='~/docs/work/scripts/flv2avi.sh'
+alias img='xloadimage'
+alias h='history'
+alias c='clear'
+alias ...='cd ../../'
+alias m='less'
+alias netscape='opera'
+alias ls='ls --color=auto'
+alias xdate='date +%d/%m/%y'
+alias lvl='echo $SHLVL'
+
+# listing stuff
+alias dir="ls -lSrah"
+alias lad='ls -d .*(/)'                # only show dot-directories
+alias lsa='ls -a .*(.)'                # only show dot-files
+alias lss='ls -l *(s,S,t)'             # only files with setgid/setuid/sticky flag
+alias lsl='ls -l *(@[1,10])'           # only symlinks
+alias lsx='ls -l *(*[1,10])'           # only executables
+alias lsw='ls -ld *(R,W,X.^ND/)'       # world-{readable,writable,executable} files
+alias lsbig="ls -flh *(.OL[1,10])"     # display the biggest files
+alias lsd='ls -d *(/)'                 # only show directories
+alias lse='ls -d *(/^F)'               # only show empty directories
+alias lsnew="ls -rl *(D.om[1,10])"     # display the newest files
+alias lsold="ls -rtlh *(D.om[1,10])"   # display the oldest files
+alias lssmall="ls -Srl *(.oL[1,10])"   # display the smallest files
+
+
+get_git_branch() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  echo "%{\e[0;31m%}(${ref#refs/heads/})%{\e[0;32m%}"
+}
+
+# Set the prompt
+setopt prompt_subst
+local  endprompt=$'%{\e[0m%}'
+local  startprompt=$'%{\e[0;34m%}[%{\e[0;32m%}%~%{\e[0;34m%}]%{\e[32m%}'
+case $TERM in
+    *xterm*|rxvt*)
+        #precmd () {print -Pn "\e]0;%n@%m: %~\a"}
+        precmd () {
+            print -Pn "\e]0;[%~] %n@%m\a"
+            #prompt="$startprompt$(get_git_branch)%#$endprompt "
+        }
+    ;;
+    linux)
+        precmd () {
+            #prompt="$startprompt$(get_git_branch)%#$endprompt "
+        }
+    ;;
+esac
+
+autoload colors zsh/terminfo
+if [[ "$terminfo[colors]" -ge 8 ]]; then
+    colors
+fi
+for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
+    eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
+    eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
+    (( count = $count + 1 ))
+done
+PR_NO_COLOR="%{$terminfo[sgr0]%}"
+PS1="[$PR_BLUE%n$PR_WHITE@$PR_GREEN%U%m%u$PR_NO_COLOR:$PR_RED%2c$PR_NO_COLOR]%(!.#.$) "
+RPS1="$PR_LIGHT_YELLOW(%D{%m-%d %H:%M})$PR_NO_COLOR"
+
+# Settings.
+path=( \
+    /home/delphi/bin \
+    /bin \
+    /sbin \
+    /usr/bin \
+    /usr/sbin \
+    /usr/local/bin \
+    /usr/local/sbin \
+    /usr/games \
+    /usr/X11R6/bin \
+    ~/docs/soft/OpenWrt-SDK-Linux-i686-1/staging_dir_mipsel/bin )
+
+export EDITOR=vim
+export VISUAL='gvim'
+
+
+# # bug report sent, but this is broken for now.
+# autoload colors
+# colors
+# prompt="$PromptColor%~%(!|$fg[yellow]|$fg_bold[black])%#$reset_color "
+
+[ "$INSIDE_EMACS" = t ] && unsetopt zle
+
+# nice colors
+export LS_COLORS='no=00:fi=00:di=01;34:ln=00;36:pi=40;33:so=00;35:bd=40;33;00:cd=40;33;00:or=40;31;00:ex=00;32:*.tar=00;31:*.tgz=00;31:*.rar=00;31:*.ace=00;31:*.zip=00;31:*.bz2=00;31:*.rpm=00;31:*.gz=00;31:*.jpg=00;35:*.gif=00;35:*.bmp=00;35:*.png=00;35:*.tga=00;35:*.xpm=00;35:*.mpg=00;37:*.avi=00;37:*.mov=00;37:*.mp3=01;35:*.flac=01;35:*.ogg=01;35:*.mpc=01;35:*.wav=01;35:*.core=00;33'
+zstyle ':completion:*' list-colors $LS_COLORS
+
+# History
+export HISTSIZE=15500
+export HISTFILE=$HOME/.history_zsh
+export SAVEHIST=15700
+export TMP=$HOME/.tmp
+
+#This is for antialiasing for qt- and gtk-apps
+export QT_XFT=1
+export GDK_USE_XFT=1
+
+# We always want to use ssh for rsync.
+export RSYNC_RSH=ssh
+alias rsync='rsync -p -P --checksum -L --recursive --times'
+alias reload="source $HOME/.zshrc" # my shells often last longer than the settings.
+
+alias p='cd -'
+alias l='ls -lA'
+alias lh='l'
+alias cvsup='cvs -qz3 up -PAd'
+
+# Limits
+ulimit unlimited
+ulimit -c 0 # unlimited # for debugging
+limit stack 8192
+# limit core 0
+# limit -s
+umask 022
+
+# Autoload all shell functions from all directories in $fpath (following
+# symlinks) that have the executable bit on (the executable bit is not
+# necessary, but gives you an easy way to stop the autoloading of a
+# particular shell function). $fpath should not be empty for this to
+# work.  for func in $^fpath/*(N-.x:t); autoload $func
+
+# Global aliases -- These do not have to be
+# at the beginning of the command line.
+#  alias -g L='|less'
+#  alias -g H='|head'
+#  alias -g T='|tail'
+#  alias -g G='|grep
+
+manpath=( \
+    /usr/X11R6/man \
+    /usr/local/man \
+    /var/qmail/man \
+    /usr/share/man \
+    /usr/man )
+
+# Don't wanna know I got new mail :P
+unset mailpath
+#mailpath=( "/usr/spool/mail/$LOGNAME?You inexplicably have new mail in /usr/spool/mail/$LOGNAME"
+mailpath="/var/mail/delphi?You have new mail"
+# "$HOME/Mail/junk?You have junk mail in ~/Mail/junk" )
+
+# automatically remove duplicates from these arrays
+typeset -U path cdpath fpath manpath
+
+
+# Set/unset  shell options
+setopt \
+    brace_ccl inc_append_history hist_ignore_space \
+    hist_no_store hist_no_functions hist_ignore_all_dups \
+    hist_expire_dups_first hist_reduce_blanks no_hup \
+    no_check_jobs autocd autolist autopushd autoresume \
+    cdablevars extendedglob globdots longlistjobs \
+    clobber notify pushdminus pushdsilent \
+    pushdtohome rcquotes recexact sunkeyboardhack
+
+# setopt autocd correct correctall
+unsetopt bgnice autoparamslash cdablevars
+
+# Autoload zsh modules when they are referenced
+# zmodload -a zsh/stat stat
+# zmodload -a zsh/zpty zpty
+# zmodload -a zsh/zprof zprof
+# zmodload -ap zsh/mapfile mapfile
+
+# Setup new style completion system. To see examples of the old style
+# (compctl based) programmable completion, check Misc/compctl-examples
+# in the zsh distribution.
+autoload -U compinit
+compinit
+# Completion Styles
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
+## add colors to processes for kill completion
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+## on processes completion complete all user processes
+#zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -A -o pid,user,cmd'
+zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -u $USER -o pid,cmd'
+zstyle ':completion:*:processes-names' command 'ps axho command'
+zstyle ':completion:*:*:kill:*:processes' menu select=1 _complete _ignored _approximate
+
+zstyle ':completion:*' completer _complete _list _oldlist _expand _ignored _match _correct _approximate _prefix
+
+# If you end up using a directory as argument, this will remove the trailing
+# slash (usefull in ln)
+zstyle ':completion:*' squeeze-slashes true
+
+# list of completers to use
+zstyle ':completion:*::::' completer _expand _complete _ignored #_approximate
+
+# insert all expansions for expand completer
+zstyle ':completion:*:expand:*' tag-order all-expansions
+
+# ssh/scp-completion
+zstyle ':completion:*:scp:*' tag-order \
+        'hosts:-host hosts:-domain:domain hosts:-ipaddr:IP\ address *'
+zstyle ':completion:*:scp:*' group-order \
+        users files all-files hosts-domain hosts-host hosts-ipaddr
+zstyle ':completion:*:ssh:*' tag-order \
+        users 'hosts:-host hosts:-domain:domain hosts:-ipaddr:IP\ address *'
+zstyle ':completion:*:ssh:*' group-order \
+        hosts-domain hosts-host users hosts-ipaddr
+zstyle ':completion:*:(ssh|scp):*:hosts-host' ignored-patterns \
+        '*.*' loopback localhost
+zstyle ':completion:*:(ssh|scp):*:hosts-domain' ignored-patterns \
+        '<->.<->.<->.<->' '^*.*' '*@*'
+zstyle ':completion:*:(ssh|scp):*:hosts-ipaddr' ignored-patterns \
+        '^<->.<->.<->.<->' '127.0.0.<->'
+zstyle ':completion:*:(ssh|scp):*:users' ignored-patterns \
+        adm bin daemon halt lp named shutdown sync
+
+if [[ -e "$HOME/.ssh/known_hosts" ]]; then
+    zstyle ':completion:*:(ssh|scp|sftp):*' hosts ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*}
+fi
+
+# offer indexes before parameters in subscripts
+zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+
+# Filename suffixes to ignore during completion (except after rm
+# command)
+zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns \
+    '*?.o' '*~' '*?.old' '*?.pro'
+
+# ignore completion functions (until the _ignored completer)
+zstyle ':completion:*:functions' ignored-patterns '_*'
+
+# Fix keys; Use cat > /dev/null to find out the keynames
+bindkey -e                 # emacs key bindings
+bindkey '^[[2~' overwrite-mode # Insert
+bindkey '^[[3~' delete-char
+#bindkey '^[[5~' up-line-or-history
+#bindkey '^[[6~' down-line-or-history
+bindkey '^[[7~' beginning-of-line # Home
+bindkey '^[OH' beginning-of-line # Home
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[8~' end-of-line # End
+bindkey '^[OF' end-of-line # End
+bindkey '^[[4~' end-of-line
+bindkey '^[,'   insert-last-word
+#bindkey '^[[5~' history-search-backward
+#bindkey '^[[6~' history-search-forward
+
+#bindkey ^[[I end-of-line #history-search-backward
+#bindkey ^[[G history-search-forward
+bindkey '^[[5~' history-beginning-search-backward # Page Up
+bindkey '^[[6~' history-beginning-search-forward # Page Dn.
+bindkey ' '  magic-space   # also do history expansion on space
+bindkey '^I' complete-word # complete on tab, leave expansion to _expand
+# unbind c-s and c-q
+stty -ixon
+
+#bindkey "^[[A" history-search-backward
+#bindkey "^[[B" history-search-forward
