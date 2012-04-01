@@ -31,3 +31,9 @@
 [submodule "_vim/bundle/omnicppcomplete"]
 	path = _vim/bundle/omnicppcomplete
 	url = https://github.com/vim-scripts/OmniCppComplete.git
+[submodule "_vim/bundle/python-mode"]
+	path = _vim/bundle/python-mode
+	url = https://github.com/klen/python-mode.git
+[submodule "_vim/bundle/xptemplate"]
+	path = _vim/bundle/xptemplate
+	url = https://github.com/drmingdrmer/xptemplate.git
