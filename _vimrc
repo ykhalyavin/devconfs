@@ -1,8 +1,5 @@
 " включаем несовместимость настроек с Vi (ибо Vi нам и не понадобится).
 set nocompatible
-retab
-syntax on
-
 filetype off
 
 call pathogen#runtime_append_all_bundles()
@@ -10,7 +7,10 @@ call pathogen#helptags()
 
 filetype plugin indent on
 
-set fencs=utf8,cp1251 " порядок перебора кодировок при открытии файла
+retab
+syntax on
+
+set fencs=utf8,koi8-r,cp1251 " порядок перебора кодировок при открытии файла
 set nobackup    " не создавать бэкап
 set hidden      " переключаем измененные буферы без предварительного сохранения
 set wildmenu    " используем допол
@@ -80,9 +80,14 @@ set textwidth   =78 " ширина текстовой строки
 
 if has("gui_running")
     set guioptions =afgitef
-    set guifont    =Liberation\ Mono\ 10
+    "set guifont    =Liberation\ Mono\ 10
+    "set guifont    =Ubuntu\ Mono\ Italic\ 12
+    set guifont    =Andale\ Mono\ Italic\ 11
+
     set background =dark
     colorscheme lucius
+else
+    colorscheme desert
 endif
 
 " удаление лишних пробелов перед сохранением файла
@@ -92,7 +97,9 @@ au BufWritePre,FileWritePre * %s/\s\+$//e
 au BufWritePost * silent call cursor(au_line, au_col)
 
 au FileType html,mail set formatoptions=tq textwidth=78
-au Filetype html,eruby,tt2html set softtabstop=2 sw=2
+au Filetype html,eruby,tt2html,jinja,htmldjango set softtabstop=2 sw=2
+
+au FileType javascript set softtabstop=2 sw=2 nowrap
 
 au BufEnter *.htaccess set nowrap
 
@@ -142,6 +149,17 @@ imap <PageUp> <C-O><C-U><C-O><C-U>
 nmap <PageDown> <C-D><C-D>
 imap <PageDown> <C-O><C-D><C-O><C-D>
 
+" переход между окнами по Ctrl-стрелочка
+nnoremap <silent> <C-Up>             :wincmd k<CR>
+nnoremap <silent> <C-Down>           :wincmd j<CR>
+nnoremap <silent> <C-Left>           :wincmd h<CR>
+nnoremap <silent> <C-Right>          :wincmd l<CR>
+
+inoremap <silent> <C-Up>        <Esc>:wincmd k<CR>a
+inoremap <silent> <C-Down>      <Esc>:wincmd j<CR>a
+inoremap <silent> <C-Left>      <Esc>:wincmd h<CR>a
+inoremap <silent> <C-Right>     <Esc>:wincmd l<CR>a
+
 " форматирование по ближайшей скобке
 imap <C-L> <C-O>=%
 
@@ -152,10 +170,10 @@ vnoremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$h' : 'g_')
 imap <Home> <C-o><Home><C-o>i
 imap <End> <C-o><End><C-o>a<C-o>a
 
-" комментируем/раскомментируем строки по Ctrl-C
-imap <C-C> <Esc>:call NERDComment(0, "invert")<CR>a
-nmap <C-C>      :call NERDComment(0, "invert")<CR>
-vmap <C-C>      :call NERDComment(0, "invert")<CR>
+" комментируем/раскомментируем строки по Ctrl-/
+"imap <C-C> <Esc>:call NERDComment(0, "invert")<CR>a
+"nmap <C-C>      :call NERDComment(0, "invert")<CR>
+"vmap <C-C>      :call NERDComment(0, "invert")<CR>
 
 " сохранение текущего буфера
 imap <unique> <C-S> <Esc>:w<CR>a
@@ -167,8 +185,10 @@ nmap <F4>      :BD<CR>
 
 nnoremap <leader>p :NERDTreeToggle<cr>
 let NERDTreeShowBookmarks = 1 " NERDTree показывает закладки
-let NERDTreeDirArrows = 0 " отображать '+~' вместо utf-8 стрелочек
+"let NERDTreeDirArrows = 0 " отображать '+~' вместо utf-8 стрелочек
+let NERDTreeDirArrows = 1 " отображать utf-8 стрелочки вместо '+~'
 let NERDTreeMinimalUI = 1 " убрать все лишнее (подсказка помощи, надписи и т.д.)
+let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc']
 
 let g:ConqueTerm_InsertOnEnter = 1 " при входе в буфер, вкл. режим Insert
 let g:ConqueTerm_ReadUnfocused = 1 " обновлять буфер, если мы не в нем
@@ -177,18 +197,20 @@ let g:ConqueTerm_CWInsert      = 1 " обработка C-W в Insert режим
 let g:qb_hotkey = "<F10>"    " запускаем quickbuf по 'F10'
 let g:CommandTMaxHeight = 10 " макс. высота окна Command-T -- 10 строк
 
-nnoremap <silent> <F8> :TlistToggle<CR>
-let Tlist_Inc_Winwidth       = 0 " TagList: Не расширять окошко
-let Tlist_Use_Right_Window   = 1 " Открываться в окошке справа
-let Tlist_Exit_OnlyWindow    = 1 " Завершаться, если Tlist посл. окно
-let Tlist_Show_One_File      = 1 " Показывать тэги только для текущего файла
-let Tlist_Enable_Fold_Column = 0 " no fold column (only showing one file)
-let Tlist_Use_SingleClick    = 1 " переходить на тэг в один клик
-let Tlist_Compact_Format     = 1 " Не показывать лишней информации
-let g:Tlist_Sort_Type        = "name"
+nnoremap <silent> <F8> :TagbarToggle<CR>
+let g:AutoPairsFlyMode = 1
+let g:TagmaBufMgrMapCArrow = 0
+
+function! MakeTags(dir, tagfile)
+    let cmd = 'ctags -R --tag-relative=yes -f ' . a:tagfile . ' ' . a:dir
+    echo 'run ' . cmd
+    let x = system(cmd)
+endfunction
 
 source $HOME/.vim/settings/binary.vim
 source $HOME/.vim/settings/latex.vim
 source $HOME/.vim/settings/perl.vim
 source $HOME/.vim/settings/python.vim
+source $HOME/.vim/settings/mako.vim
 source $HOME/.vim/settings/agru.vim
+source $HOME/.vim/settings/kanobu.vim
