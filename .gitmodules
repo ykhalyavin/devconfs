@@ -31,3 +31,21 @@
 [submodule "_vim/bundle/omnicppcomplete"]
 	path = _vim/bundle/omnicppcomplete
 	url = https://github.com/vim-scripts/OmniCppComplete.git
+[submodule "_vim/bundle/Jinja"]
+	path = _vim/bundle/Jinja
+	url = https://github.com/vim-scripts/Jinja.git
+[submodule "_vim/bundle/TagmaBufMgr"]
+	path = _vim/bundle/TagmaBufMgr
+	url = https://github.com/LStinson/TagmaBufMgr.git
+[submodule "_vim/bundle/ctrlp.vim"]
+	path = _vim/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule "_vim/bundle/python-mode"]
+	path = _vim/bundle/python-mode
+	url = https://github.com/klen/python-mode
+[submodule "_vim/bundle/tagbar"]
+	path = _vim/bundle/tagbar
+	url = https://github.com/majutsushi/tagbar.git
+[submodule "_vim/bundle/mako.vim"]
+	path = _vim/bundle/mako.vim
+	url = https://github.com/vim-scripts/mako.vim.git
