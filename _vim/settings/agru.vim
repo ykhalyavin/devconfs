@@ -24,6 +24,15 @@ function! SetAgRuSettings()
 
         " старый AG.ru использует табы, не преобразовываем табуляцию в пробелы
         set noet
+    elseif getcwd() =~ "git/downloader"
+        let $p = substitute(getcwd(), 'git/downloader.*', 'git/downloader', 'g')
+
+        set tags=$p/tags
+        nmap <silent> <leader>t :CommandT $p<cr>
+        nmap <silent> <C-P> :CtrlP $p<cr>
+        imap <C-P> <Esc>:CtrlP $p<cr>
+
+        set et
     endif
 
 endfunction
