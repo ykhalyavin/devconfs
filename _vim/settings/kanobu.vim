@@ -23,7 +23,6 @@ function! SetKanobuSettings()
         command! -nargs=* MakeTags call MakeTags($p, $t)
 
         set tags=$t
-        nmap <silent> <leader>t :CommandT $p<cr>
         nmap <silent> <C-P> :CtrlP $p<cr>
         imap <C-P> <Esc>:CtrlP $p<cr>
 
@@ -35,11 +34,21 @@ function! SetKanobuSettings()
         command! -nargs=* MakeTags call MakeTags($p, $t)
 
         set tags=$t
-        nmap <silent> <leader>t :CommandT $p<cr>
         nmap <silent> <C-P> :CtrlP $p<cr>
         imap <C-P> <Esc>:CtrlP $p<cr>
 
         set noet
+    elseif getcwd() =~ "sshfs/dev/ui"
+        let $p = substitute(getcwd(), 'sshfs/dev/ui.*', 'sshfs/dev/ui', 'g')
+        let $t = $HOME . "/.tmp/kplus_ui_tags"
+
+        command! -nargs=* MakeTags call MakeTags($p, $t)
+
+        set tags=$t
+        nmap <silent> <C-P> :CtrlP $p<cr>
+        imap <C-P> <Esc>:CtrlP $p<cr>
+
+        set et
     endif
 endfunction
 
