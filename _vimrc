@@ -80,12 +80,11 @@ set textwidth   =78 " ширина текстовой строки
 
 if has("gui_running")
     set guioptions =afgitef
-    "set guifont    =Liberation\ Mono\ 10
-    "set guifont    =Ubuntu\ Mono\ Italic\ 12
-    set guifont    =Andale\ Mono\ Italic\ 11
+    "set guifont    =Andale\ Mono\ Italic\ 11
+    set guifont    =Andale\ Mono\ for\ Powerline\ 11
 
     set background =dark
-    colorscheme lucius
+    colorscheme festoon
 else
     colorscheme desert
 endif
@@ -190,12 +189,7 @@ let NERDTreeDirArrows = 1 " отображать utf-8 стрелочки вме
 let NERDTreeMinimalUI = 1 " убрать все лишнее (подсказка помощи, надписи и т.д.)
 let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc']
 
-let g:ConqueTerm_InsertOnEnter = 1 " при входе в буфер, вкл. режим Insert
-let g:ConqueTerm_ReadUnfocused = 1 " обновлять буфер, если мы не в нем
-let g:ConqueTerm_CWInsert      = 1 " обработка C-W в Insert режиме
-
 let g:qb_hotkey = "<F10>"    " запускаем quickbuf по 'F10'
-let g:CommandTMaxHeight = 10 " макс. высота окна Command-T -- 10 строк
 
 nnoremap <silent> <F8> :TagbarToggle<CR>
 let g:AutoPairsFlyMode = 1
@@ -206,6 +200,11 @@ function! MakeTags(dir, tagfile)
     echo 'run ' . cmd
     let x = system(cmd)
 endfunction
+
+let g:Powerline_symbols = 'fancy'
+
+nmap <silent> <C-B> :CtrlPBuffer<CR>
+imap <silent> <C-B> <Esc>:CtrlPBuffer<CR>
 
 source $HOME/.vim/settings/binary.vim
 source $HOME/.vim/settings/latex.vim
