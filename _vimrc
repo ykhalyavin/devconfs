@@ -2,8 +2,42 @@
 set nocompatible
 filetype off
 
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+
+Bundle 'LStinson/TagmaBufMgr'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'edsono/vim-matchit'
+Bundle 'ervandew/supertab'
+
+Bundle 'tpope/vim-fugitive'
+Bundle 'gregsexton/gitv'
+
+Bundle 'jiangmiao/auto-pairs'
+Bundle 'kien/ctrlp.vim'
+Bundle 'klen/python-mode'
+Bundle 'majutsushi/tagbar'
+
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+
+Bundle 'sjl/gundo.vim'
+Bundle 'vim-scripts/Jinja'
+Bundle 'vim-scripts/OmniCppComplete'
+Bundle 'vim-scripts/QuickBuf'
+Bundle 'vim-scripts/bufkill.vim'
+Bundle 'vim-scripts/grep.vim'
+Bundle 'vim-scripts/mako.vim'
+Bundle 'vim-scripts/taglist.vim'
+Bundle 'vim-scripts/vcscommand.vim'
+
+
+"call pathogen#runtime_append_all_bundles()
+"call pathogen#helptags()
 
 filetype plugin indent on
 
