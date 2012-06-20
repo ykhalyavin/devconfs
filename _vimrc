@@ -81,7 +81,8 @@ set textwidth   =78 " ширина текстовой строки
 if has("gui_running")
     set guioptions =afgitef
     "set guifont    =Andale\ Mono\ Italic\ 11
-    set guifont    =Andale\ Mono\ for\ Powerline\ 11
+    "set guifont    =Andale\ Mono\ for\ Powerline\ 11
+    set guifont    =Mensch\ for\ Powerline\ 11
 
     set background =dark
     colorscheme festoon
