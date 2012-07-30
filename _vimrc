@@ -5,39 +5,48 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+" For normal vim colors in 'screen', recompiling screen is required
+
+" mkdir -p $HOME/.tmp $HOME/bin
+" wget http://ftp.gnu.org/gnu/screen/screen-4.0.3.tar.gz -O /tmp/screen-4.0.3.tar.gz
+" tar xzf /tmp/screen-4.0.3.tar.gz -C /tmp
+" cd /tmp/screen-4.0.3 && ./configure --enable-locale --enable-colors256 --enable-rxvt_osc --prefix=$HOME/.tmp/screen && make && make install && rm -rf /tmp/screen-4.0.3
+" ln -sf $HOME/.tmp/screen/bin/screen $HOME/bin
+" reload
+
 " let Vundle manage Vundle
 " required!
 Bundle 'gmarik/vundle'
 
-Bundle 'LStinson/TagmaBufMgr'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'edsono/vim-matchit'
-Bundle 'ervandew/supertab'
+Bundle 'git://github.com/tomasr/molokai.git'
 
-Bundle 'tpope/vim-fugitive'
-Bundle 'gregsexton/gitv'
+Bundle 'git://github.com/Lokaltog/vim-powerline'
+Bundle 'git://github.com/edsono/vim-matchit'
+Bundle 'git://github.com/ervandew/supertab'
 
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'kien/ctrlp.vim'
-Bundle 'klen/python-mode'
-Bundle 'majutsushi/tagbar'
+Bundle 'git://github.com/tpope/vim-fugitive'
+Bundle 'git://github.com/gregsexton/gitv'
 
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
+Bundle 'git://github.com/jiangmiao/auto-pairs'
+Bundle 'git://github.com/kien/ctrlp.vim'
+Bundle 'git://github.com/majutsushi/tagbar'
 
-Bundle 'sjl/gundo.vim'
-Bundle 'vim-scripts/Jinja'
-Bundle 'vim-scripts/OmniCppComplete'
-Bundle 'vim-scripts/QuickBuf'
-Bundle 'vim-scripts/bufkill.vim'
-Bundle 'vim-scripts/grep.vim'
-Bundle 'vim-scripts/mako.vim'
-Bundle 'vim-scripts/taglist.vim'
-Bundle 'vim-scripts/vcscommand.vim'
+Bundle 'git://github.com/scrooloose/nerdcommenter'
+Bundle 'git://github.com/scrooloose/nerdtree'
 
+Bundle 'git://github.com/sjl/gundo.vim'
+Bundle 'git://github.com/vim-scripts/Jinja'
+Bundle 'git://github.com/vim-scripts/OmniCppComplete'
+Bundle 'git://github.com/vim-scripts/QuickBuf'
+Bundle 'git://github.com/vim-scripts/bufkill.vim'
+Bundle 'git://github.com/vim-scripts/grep.vim'
+Bundle 'git://github.com/vim-scripts/mako.vim'
+Bundle 'git://github.com/vim-scripts/taglist.vim'
+Bundle 'git://github.com/vim-scripts/vcscommand.vim'
 
-"call pathogen#runtime_append_all_bundles()
-"call pathogen#helptags()
+if has('python')
+Bundle 'git://github.com/klen/python-mode'
+endif
 
 filetype plugin indent on
 
@@ -62,9 +71,10 @@ set laststatus  =2        " всегда отображать линию ста�
 set history     =500      " сохраняем 500 линий поисковой истории
 set browsedir   =buffer
 set display     =lastline " не отображать в последней строке '@@@@@'
-set shell       =/bin/bash
+""set shell       =/bin/bash
 set wcm         =<Tab>
 set pastetoggle =<F3>     " Переключение режима paste по F3
+set t_Co=256
 
 if v:version >= 703
     set colorcolumn =79 " отображать вертикальную линию после 79 столбца
@@ -119,10 +129,12 @@ if has("gui_running")
     set guifont    =Mensch\ for\ Powerline\ 11
 
     set background =dark
-    colorscheme festoon
+    "colorscheme festoon
 else
-    colorscheme desert
+    "colorscheme desert
 endif
+
+colorscheme molokai
 
 " удаление лишних пробелов перед сохранением файла
 au BufWritePre,FileWritePre * let au_line=line(".")
@@ -223,6 +235,7 @@ let NERDTreeShowBookmarks = 1 " NERDTree показывает закладки
 let NERDTreeDirArrows = 1 " отображать utf-8 стрелочки вместо '+~'
 let NERDTreeMinimalUI = 1 " убрать все лишнее (подсказка помощи, надписи и т.д.)
 let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc']
+let g:NERDShutUp = 1 " disable warnings from NERDCommenter
 
 let g:qb_hotkey = "<F10>"    " запускаем quickbuf по 'F10'
 
@@ -236,7 +249,10 @@ function! MakeTags(dir, tagfile)
     let x = system(cmd)
 endfunction
 
-let g:Powerline_symbols = 'fancy'
+let g:molokai_original = 1
+let g:Powerline_symbols = 'compatible'
+let g:Powerline_cache_enabled = 1
+let g:Powerline_cache_file = expand('$TMP/Powerline.cache')
 
 nmap <silent> <C-B> :CtrlPBuffer<CR>
 imap <silent> <C-B> <Esc>:CtrlPBuffer<CR>
