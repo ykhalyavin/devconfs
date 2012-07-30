@@ -16,7 +16,7 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+Bundle 'git://github.com/gmarik/vundle.git'
 
 Bundle 'git://github.com/tomasr/molokai.git'
 
