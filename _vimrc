@@ -122,6 +122,8 @@ set tabstop     =4  " ширина таба 4 пробела
 set shiftwidth  =4  " кол-во пробелов при отступах в 'cindent', >>, <<, и т.д.
 set textwidth   =78 " ширина текстовой строки
 
+set complete   -=i  " не искать по подключенным заголовкам
+
 if has("gui_running")
     set guioptions =afgitef
     "set guifont    =Andale\ Mono\ Italic\ 11
