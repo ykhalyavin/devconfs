@@ -19,6 +19,7 @@ call vundle#rc()
 Bundle 'git://github.com/gmarik/vundle.git'
 
 Bundle 'git://github.com/tomasr/molokai.git'
+Bundle 'git://github.com/altercation/vim-colors-solarized.git'
 
 Bundle 'git://github.com/Lokaltog/vim-powerline'
 Bundle 'git://github.com/edsono/vim-matchit'
@@ -136,7 +137,8 @@ else
     "colorscheme desert
 endif
 
-colorscheme molokai
+set bg=dark
+colorscheme solarized
 
 " удаление лишних пробелов перед сохранением файла
 au BufWritePre,FileWritePre * let au_line=line(".")
@@ -250,6 +252,10 @@ function! MakeTags(dir, tagfile)
     echo 'run ' . cmd
     let x = system(cmd)
 endfunction
+
+if empty($TMP)
+    let $TMP = $HOME."/.tmp"
+endif
 
 let g:molokai_original = 1
 let g:Powerline_symbols = 'compatible'
