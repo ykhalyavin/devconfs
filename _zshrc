@@ -16,29 +16,16 @@ export JAVA_HOME='/usr/lib/jvm/java-6-sun/'
 #export ETHERBOX_CONTROL=$HOME/cvs/etherbox/control
 export ETHERBOX_CONTROL=$HOME/git/sensor-host
 export CLOOP_RESISTOR='9.959'
-#export GIT_PAGER=cat
-# Global aliases for cd, ls, etc
-alias -g M='~/docs/muz/'
-alias -g ADOCS='~/docs/docs/avr/'
-alias -g FTP='~ftp/'
 
 #alias -s {avi,mpeg,mpg,mov,m2v,AVI}=mplayer
 
 alias mgcc='/home/delphi/docs/work/openwrt/kamikaze/trunk/staging_dir_mipsel/bin/mipsel-linux-uclibc-gcc'
 #alias mgcc='/home/delphi/docs/work/openwrt/kamikaze/trunk-20070622/staging_dir_mipsel/bin/mipsel-linux-uclibc-gcc'
 
-alias cp2koi='iconv -c -f cp1251 -t koi8-r'
-alias koi2cp='iconv -c -f koi8-r -t cp1251'
-alias flv2avi='~/docs/work/scripts/flv2avi.sh'
-alias img='xloadimage'
-alias h='history'
-alias c='clear'
 alias ...='cd ../../'
 alias m='less'
-alias netscape='opera'
 alias ls='ls --color=auto'
-alias xdate='date +%d/%m/%y'
-alias lvl='echo $SHLVL'
+alias grep='grep --exclude-dir=.svn --exclude-dir=.git --exclude-dir=log'
 
 # listing stuff
 alias dir="ls -lSrah"
@@ -85,7 +72,8 @@ if [[ "$terminfo[colors]" -ge 8 ]]; then
     colors
 fi
 for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
-    eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
+    #eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
+    eval PR_$color='%{$fg[${(L)color}]%}'
     eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
     (( count = $count + 1 ))
 done
