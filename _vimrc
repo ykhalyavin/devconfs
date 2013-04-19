@@ -21,6 +21,7 @@ Bundle 'git://github.com/gmarik/vundle.git'
 Bundle 'git://github.com/tomasr/molokai.git'
 Bundle 'git://github.com/altercation/vim-colors-solarized.git'
 
+Bundle 'git://github.com/mileszs/ack.vim'
 Bundle 'git://github.com/Lokaltog/vim-powerline'
 Bundle 'git://github.com/edsono/vim-matchit'
 Bundle 'git://github.com/ervandew/supertab'
@@ -76,6 +77,10 @@ set display     =lastline " не отображать в последней ст
 set wcm         =<Tab>
 set pastetoggle =<F3>     " Переключение режима paste по F3
 set t_Co=256
+set cursorline
+set linespace   =1
+
+set gdefault              " Подсвечивать все совпадения в строке
 
 if v:version >= 703
     set colorcolumn =79 " отображать вертикальную линию после 79 столбца
@@ -97,7 +102,7 @@ endif
 
 set novisualbell  " отключаем пищание
 set incsearch     " инкрементальный поиск
-set nohlsearch    " не подсвечивать найденную фразу
+set hlsearch      " подсвечивать найденную фразу
 
 set list          " отображать табы (работает вместе с listchars)
 set listchars=tab:\|\ \,trail:> " отображать табы и пробелы
@@ -182,6 +187,8 @@ au BufEnter *.[ch] nmap ,h :find %:t:r.h<cr>
 
 let python_highlight_all=1
 
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+
 menu Encoding.koi8-r       :e ++enc=koi8-r<CR>
 menu Encoding.windows-1251 :e ++enc=cp1251<CR>
 menu Encoding.ibm-866      :e ++enc=ibm866<CR>
@@ -199,16 +206,11 @@ imap <PageUp> <C-O><C-U><C-O><C-U>
 nmap <PageDown> <C-D><C-D>
 imap <PageDown> <C-O><C-D><C-O><C-D>
 
-" переход между окнами по Ctrl-стрелочка
-nnoremap <silent> <C-Up>             :wincmd k<CR>
-nnoremap <silent> <C-Down>           :wincmd j<CR>
-nnoremap <silent> <C-Left>           :wincmd h<CR>
-nnoremap <silent> <C-Right>          :wincmd l<CR>
-
-inoremap <silent> <C-Up>        <Esc>:wincmd k<CR>a
-inoremap <silent> <C-Down>      <Esc>:wincmd j<CR>a
-inoremap <silent> <C-Left>      <Esc>:wincmd h<CR>a
-inoremap <silent> <C-Right>     <Esc>:wincmd l<CR>a
+" переход между окнами по Ctrl-hjkl
+nmap <C-h> <C-W>h
+nmap <C-j> <C-W>j
+nmap <C-k> <C-W>k
+nmap <C-l> <C-W>l
 
 " форматирование по ближайшей скобке
 imap <C-L> <C-O>=%
@@ -244,7 +246,7 @@ let g:NERDShutUp = 1 " disable warnings from NERDCommenter
 let g:qb_hotkey = "<F10>"    " запускаем quickbuf по 'F10'
 
 nnoremap <silent> <F8> :TagbarToggle<CR>
-let g:AutoPairsFlyMode = 1
+let g:AutoPairsFlyMode = 0
 let g:TagmaBufMgrMapCArrow = 0
 
 function! MakeTags(dir, tagfile)
@@ -264,6 +266,15 @@ let g:Powerline_cache_file = expand('$TMP/Powerline.cache')
 
 nmap <silent> <C-B> :CtrlPBuffer<CR>
 imap <silent> <C-B> <Esc>:CtrlPBuffer<CR>
+
+inoremap  <Up>     <NOP>
+inoremap  <Down>   <NOP>
+inoremap  <Left>   <NOP>
+inoremap  <Right>  <NOP>
+noremap   <Up>     <NOP>
+noremap   <Down>   <NOP>
+noremap   <Left>   <NOP>
+noremap   <Right>  <NOP>
 
 source $HOME/.vim/settings/binary.vim
 source $HOME/.vim/settings/latex.vim
