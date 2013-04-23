@@ -24,8 +24,16 @@ alias mgcc='/home/delphi/docs/work/openwrt/kamikaze/trunk/staging_dir_mipsel/bin
 
 alias ...='cd ../../'
 alias m='less'
-alias ls='ls --color=auto'
 alias grep='grep --exclude-dir=.svn --exclude-dir=.git --exclude-dir=log'
+
+case $OSTYPE in
+    freebsd*)
+        alias ls='ls -G'
+    ;;
+    linux)
+        alias ls='ls --color=auto'
+    ;;
+esac
 
 # listing stuff
 alias dir="ls -lSrah"
