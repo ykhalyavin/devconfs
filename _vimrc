@@ -29,7 +29,6 @@ Bundle 'git://github.com/ervandew/supertab'
 Bundle 'git://github.com/tpope/vim-fugitive'
 Bundle 'git://github.com/gregsexton/gitv'
 
-Bundle 'git://github.com/jiangmiao/auto-pairs'
 Bundle 'git://github.com/kien/ctrlp.vim'
 Bundle 'git://github.com/majutsushi/tagbar'
 
@@ -45,6 +44,7 @@ Bundle 'git://github.com/vim-scripts/grep.vim'
 Bundle 'git://github.com/vim-scripts/mako.vim'
 Bundle 'git://github.com/vim-scripts/taglist.vim'
 Bundle 'git://github.com/vim-scripts/vcscommand.vim'
+Bundle 'git://github.com/tpope/vim-surround.git'
 
 if has('python')
 Bundle 'git://github.com/klen/python-mode'
@@ -73,7 +73,7 @@ set laststatus  =2        " всегда отображать линию ста�
 set history     =500      " сохраняем 500 линий поисковой истории
 set browsedir   =buffer
 set display     =lastline " не отображать в последней строке '@@@@@'
-""set shell       =/bin/bash
+"set shell       =/bin/bash
 set wcm         =<Tab>
 set pastetoggle =<F3>     " Переключение режима paste по F3
 set t_Co=256
@@ -152,9 +152,6 @@ au BufWritePre,FileWritePre * %s/\s\+$//e
 au BufWritePost * silent call cursor(au_line, au_col)
 
 au FileType html,mail set formatoptions=tq textwidth=78
-au Filetype html,eruby,tt2html,jinja,htmldjango set softtabstop=2 sw=2
-
-au FileType javascript set softtabstop=2 sw=2 nowrap
 
 au BufEnter *.htaccess set nowrap
 
@@ -246,7 +243,6 @@ let g:NERDShutUp = 1 " disable warnings from NERDCommenter
 let g:qb_hotkey = "<F10>"    " запускаем quickbuf по 'F10'
 
 nnoremap <silent> <F8> :TagbarToggle<CR>
-let g:AutoPairsFlyMode = 0
 let g:TagmaBufMgrMapCArrow = 0
 
 function! MakeTags(dir, tagfile)
