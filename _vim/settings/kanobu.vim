@@ -49,6 +49,17 @@ function! SetKanobuSettings()
         imap <C-P> <Esc>:CtrlP $p<cr>
 
         set et
+    elseif getcwd() =~ "git/auth"
+        let $p = substitute(getcwd(), 'git/auth.*', 'git/auth', 'g')
+        let $t = $HOME . "/.tmp/tags_tags"
+
+        command! -nargs=* MakeTags call MakeTags($p, $t)
+
+        set tags=$t
+        nmap <silent> <C-P> :CtrlP $p<cr>
+        imap <C-P> <Esc>:CtrlP $p<cr>
+
+        autocmd BufEnter *.html set ft=htmljinja
     endif
 endfunction
 
