@@ -22,7 +22,9 @@ Bundle 'git://github.com/tomasr/molokai.git'
 Bundle 'git://github.com/altercation/vim-colors-solarized.git'
 
 Bundle 'git://github.com/mileszs/ack.vim'
-Bundle 'git://github.com/Lokaltog/vim-powerline'
+Bundle 'git://github.com/itchyny/lightline.vim'
+Bundle 'git://github.com/tomtom/tcomment_vim'
+Bundle 'git://github.com/mhinz/vim-signify'
 Bundle 'git://github.com/edsono/vim-matchit'
 Bundle 'git://github.com/ervandew/supertab'
 
@@ -32,7 +34,6 @@ Bundle 'git://github.com/gregsexton/gitv'
 Bundle 'git://github.com/kien/ctrlp.vim'
 Bundle 'git://github.com/majutsushi/tagbar'
 
-Bundle 'git://github.com/scrooloose/nerdcommenter'
 Bundle 'git://github.com/scrooloose/nerdtree'
 
 Bundle 'git://github.com/sjl/gundo.vim'
@@ -247,10 +248,19 @@ if empty($TMP)
     let $TMP = $HOME."/.tmp"
 endif
 
-let g:molokai_original = 1
-let g:Powerline_symbols = 'compatible'
-let g:Powerline_cache_enabled = 1
-let g:Powerline_cache_file = expand('$TMP/Powerline.cache')
+let g:pymode_options = 0
+let g:pymode_lint_write = 0 "не проверять при каждом сохранении
+let g:pymode_folding = 0 "мне не нужен авто-фолдинг
+let g:pymode_rope_vim_completion = 0 "не использовать автодополнение rope
+
+let g:tagbar_autofocus = 1
+let g:tagbar_sort = 0 "tagbar shows tags in order of they created in file
+let g:tagbar_foldlevel = 0 "close tagbar folds by default
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+let g:signify_disable_by_default = 1
 
 nmap <silent> <C-B> :CtrlPBuffer<CR>
 imap <silent> <C-B> <Esc>:CtrlPBuffer<CR>
