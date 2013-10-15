@@ -80,8 +80,6 @@ set t_Co=256
 set cursorline
 set linespace   =1
 
-set gdefault              " Подсвечивать все совпадения в строке
-
 if v:version >= 703
     set colorcolumn =79 " отображать вертикальную линию после 79 столбца
     set undofile        " включим опцию persistent undo
@@ -143,7 +141,7 @@ else
 endif
 
 set bg=dark
-colorscheme solarized
+colorscheme github
 
 " удаление лишних пробелов перед сохранением файла
 au BufWritePre,FileWritePre * let au_line=line(".")
@@ -219,11 +217,6 @@ vnoremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$h' : 'g_')
 imap <Home> <C-o><Home><C-o>i
 imap <End> <C-o><End><C-o>a<C-o>a
 
-" комментируем/раскомментируем строки по Ctrl-/
-"imap <C-C> <Esc>:call NERDComment(0, "invert")<CR>a
-"nmap <C-C>      :call NERDComment(0, "invert")<CR>
-"vmap <C-C>      :call NERDComment(0, "invert")<CR>
-
 " сохранение текущего буфера
 imap <unique> <C-S> <Esc>:w<CR>a
 nmap <unique> <C-S>      :w<CR>
@@ -238,7 +231,6 @@ let NERDTreeShowBookmarks = 1 " NERDTree показывает закладки
 let NERDTreeDirArrows = 1 " отображать utf-8 стрелочки вместо '+~'
 let NERDTreeMinimalUI = 1 " убрать все лишнее (подсказка помощи, надписи и т.д.)
 let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc']
-let g:NERDShutUp = 1 " disable warnings from NERDCommenter
 
 let g:qb_hotkey = "<F10>"    " запускаем quickbuf по 'F10'
 
