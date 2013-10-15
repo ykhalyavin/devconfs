@@ -67,7 +67,7 @@ set autochdir   " изменять текущую директорию на ди
 
 set undolevels  =100
 set wildmode    =longest,list,full
-set wildignore  =*.o,*.obj,*.bak,*.exe,*.swp,*.a,*.svn,*.git
+set wildignore  =*.o,*.obj,*.bak,*.exe,*.swp,*.a,*.svn,*.git,*.pyc
 set backspace   =indent,eol,start whichwrap+=<,>,[,] " use backspace instead of "x"
 set laststatus  =2        " всегда отображать линию статуса
 set history     =500      " сохраняем 500 линий поисковой истории
