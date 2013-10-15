@@ -1,11 +1,9 @@
 [user]
-	email = y.khalyavin@kanobu.ru
-	name = Yury Khalyavin
+    email = y.khalyavin@kanobu.ru
+    name = Yury Khalyavin
+[color]
+    ui = always
 [alias]
-    #lg1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
     lg1 = log --graph --all --format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(yellow)— %an%C(reset)%C(yellow)%d%C(reset)' --abbrev-commit --date=relative
     lg2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold white)— %an%C(reset)' --abbrev-commit
     lg = !"git lg1"
-    l = log --graph
-[format]
-        pretty = "%Cred%h%Creset %ad [%an]an%Cgreen%s%d%Creset"
