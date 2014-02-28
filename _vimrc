@@ -46,6 +46,12 @@ Bundle 'git://github.com/tpope/vim-surround.git'
 
 Bundle 'git://github.com/xolox/vim-misc'
 Bundle 'git://github.com/xolox/vim-easytags'
+Bundle 'git://github.com/reedes/vim-colors-pencil'
+Bundle 'git://github.com/ciaranm/inkpot'
+Bundle 'git://github.com/w0ng/vim-hybrid'
+
+Bundle 'git://github.com/chriskempson/base16-vim'
+Bundle 'git://github.com/doug/vimfiles'
 
 filetype plugin indent on
 
