@@ -44,6 +44,8 @@ Bundle 'git://github.com/vim-scripts/taglist.vim'
 Bundle 'git://github.com/vim-scripts/vcscommand.vim'
 Bundle 'git://github.com/tpope/vim-surround.git'
 
+Bundle 'git://github.com/xolox/vim-misc'
+Bundle 'git://github.com/xolox/vim-easytags'
 
 filetype plugin indent on
 
