@@ -104,7 +104,7 @@ path=( \
     ~/docs/soft/OpenWrt-SDK-Linux-i686-1/staging_dir_mipsel/bin )
 
 export EDITOR=vim
-export VISUAL='gvim'
+export VISUAL='vim'
 
 
 # # bug report sent, but this is broken for now.
