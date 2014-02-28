@@ -38,16 +38,12 @@ Bundle 'git://github.com/scrooloose/nerdtree'
 
 Bundle 'git://github.com/sjl/gundo.vim'
 Bundle 'git://github.com/vim-scripts/Jinja'
-Bundle 'git://github.com/vim-scripts/OmniCppComplete'
 Bundle 'git://github.com/vim-scripts/bufkill.vim'
 Bundle 'git://github.com/vim-scripts/mako.vim'
 Bundle 'git://github.com/vim-scripts/taglist.vim'
 Bundle 'git://github.com/vim-scripts/vcscommand.vim'
 Bundle 'git://github.com/tpope/vim-surround.git'
 
-if has('python')
-Bundle 'git://github.com/klen/python-mode'
-endif
 
 filetype plugin indent on
 
@@ -76,7 +72,6 @@ set display     =lastline " не отображать в последней ст
 set wcm         =<Tab>
 set pastetoggle =<F3>     " Переключение режима paste по F3
 set t_Co=256
-set cursorline
 set linespace   =1
 
 if v:version >= 703
@@ -98,7 +93,6 @@ if v:version >= 703
 endif
 
 set novisualbell  " отключаем пищание
-set incsearch     " инкрементальный поиск
 set hlsearch      " подсвечивать найденную фразу
 
 set list          " отображать табы (работает вместе с listchars)
@@ -140,7 +134,7 @@ else
 endif
 
 set bg=dark
-colorscheme github
+colorscheme solarized
 
 " удаление лишних пробелов перед сохранением файла
 au BufWritePre,FileWritePre * let au_line=line(".")
@@ -283,10 +277,11 @@ if $TERM =~ '^screen-256color'
     map! <Esc>OF <End>
 endif
 
+autocmd FileType python let b:easytags_auto_highlight = 0
+let g:easytags_autorecurse = 1
+
 source $HOME/.vim/settings/binary.vim
 source $HOME/.vim/settings/latex.vim
 source $HOME/.vim/settings/perl.vim
 source $HOME/.vim/settings/python.vim
 source $HOME/.vim/settings/mako.vim
-source $HOME/.vim/settings/agru.vim
-source $HOME/.vim/settings/kanobu.vim
