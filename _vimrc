@@ -141,8 +141,8 @@ else
     "colorscheme desert
 endif
 
-set bg=dark
-colorscheme solarized
+"set bg=dark
+colorscheme Snappy
 
 " удаление лишних пробелов перед сохранением файла
 au BufWritePre,FileWritePre * let au_line=line(".")
@@ -286,7 +286,10 @@ if $TERM =~ '^screen-256color'
 endif
 
 autocmd FileType python let b:easytags_auto_highlight = 0
-let g:easytags_autorecurse = 1
+if getcwd() =~ "git/"
+    let g:easytags_autorecurse = 1
+endif
+let g:easytags_by_filetype = $HOME."/.tags"
 
 source $HOME/.vim/settings/binary.vim
 source $HOME/.vim/settings/latex.vim
