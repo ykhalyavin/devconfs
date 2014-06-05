@@ -30,7 +30,7 @@ case $OSTYPE in
         alias grep='grep --color=auto'
         alias ls='ls -G'
     ;;
-    linux)
+    linux*)
         alias grep='grep --color=auto --exclude-dir=.svn --exclude-dir=.git --exclude-dir=log'
         alias ls='ls --color=auto'
     ;;
