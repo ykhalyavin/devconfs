@@ -1,4 +1,8 @@
 _vim/undofiles
 _vim/.netrwhist
+_vim/session.vim
 _vim/bundle/*
-!_vim/bundle/vundle
+!_vim/bundle/.empty
+
+_tmux/plugins/*
+!_tmux/plugins/.empty
