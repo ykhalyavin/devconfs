@@ -2,58 +2,81 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+if has('vim_starting')
+    set nocompatible
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-" For normal vim colors in 'screen', recompiling screen is required
+let g:neobundle#types#git#clone_depth = 1
+let g:neobundle#install_process_timeout = 600
+call neobundle#begin(expand('~/.vim/bundle/'))
 
-" mkdir -p $HOME/.tmp $HOME/bin
-" wget http://ftp.gnu.org/gnu/screen/screen-4.0.3.tar.gz -O /tmp/screen-4.0.3.tar.gz
-" tar xzf /tmp/screen-4.0.3.tar.gz -C /tmp
-" cd /tmp/screen-4.0.3 && ./configure --enable-locale --enable-colors256 --enable-rxvt_osc --prefix=$HOME/.tmp/screen && make && make install && rm -rf /tmp/screen-4.0.3
-" ln -sf $HOME/.tmp/screen/bin/screen $HOME/bin
-" reload
-
-" let Vundle manage Vundle
+" let NeoBundle manage NeoBundle
 " required!
-Bundle 'git://github.com/gmarik/vundle.git'
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/vimproc.vim', {
+          \ 'build' : {
+          \     'windows' : 'make -f make_mingw32.mak',
+          \     'cygwin' : 'make -f make_cygwin.mak',
+          \     'mac' : 'make -f make_mac.mak',
+          \     'unix' : 'make -f make_unix.mak',
+          \     'linux' : 'make -f make_unix.mak',
+          \    },
+          \ }
 
-Bundle 'git://github.com/tomasr/molokai.git'
-Bundle 'git://github.com/altercation/vim-colors-solarized.git'
+NeoBundle 'git://github.com/mileszs/ack.vim'
+NeoBundle 'git://github.com/itchyny/lightline.vim'
+NeoBundle 'git://github.com/tpope/vim-commentary'
+NeoBundle 'git://github.com/edsono/vim-matchit'
+NeoBundle 'git://github.com/Lokaltog/vim-easymotion'
 
-Bundle 'git://github.com/mileszs/ack.vim'
-Bundle 'git://github.com/itchyny/lightline.vim'
-Bundle 'git://github.com/tomtom/tcomment_vim'
-Bundle 'git://github.com/mhinz/vim-signify'
-Bundle 'git://github.com/edsono/vim-matchit'
-Bundle 'git://github.com/ervandew/supertab'
+NeoBundle 'Valloric/YouCompleteMe', {
+    \ 'build' : {
+    \     'mac' : './install.sh',
+    \     'unix' : './install.sh',
+    \     'linux' : './install.sh',
+    \     'windows' : './install.sh',
+    \     'cygwin' : './install.sh',
+    \    },
+    \ }
 
-Bundle 'git://github.com/tpope/vim-fugitive'
-Bundle 'git://github.com/gregsexton/gitv'
+NeoBundle 'git://github.com/tpope/vim-fugitive'
+NeoBundle 'git://github.com/gregsexton/gitv'
+NeoBundle 'git://github.com/vim-scripts/vcscommand.vim'
 
-Bundle 'git://github.com/kien/ctrlp.vim'
-Bundle 'git://github.com/majutsushi/tagbar'
+NeoBundle 'git://github.com/kien/ctrlp.vim'
+NeoBundle 'git://github.com/majutsushi/tagbar'
+NeoBundle 'git://github.com/vim-scripts/taglist.vim'
 
-Bundle 'git://github.com/scrooloose/nerdtree'
+NeoBundle 'git://github.com/scrooloose/nerdtree'
 
-Bundle 'git://github.com/sjl/gundo.vim'
-Bundle 'git://github.com/vim-scripts/Jinja'
-Bundle 'git://github.com/vim-scripts/bufkill.vim'
-Bundle 'git://github.com/vim-scripts/mako.vim'
-Bundle 'git://github.com/vim-scripts/taglist.vim'
-Bundle 'git://github.com/vim-scripts/vcscommand.vim'
-Bundle 'git://github.com/tpope/vim-surround.git'
+NeoBundle 'git://github.com/sjl/gundo.vim'
+NeoBundle 'git://github.com/vim-scripts/bufkill.vim'
+NeoBundle 'git://github.com/tpope/vim-surround.git'
+NeoBundle 'git://github.com/tpope/vim-obsession'
 
-Bundle 'git://github.com/xolox/vim-misc'
-Bundle 'git://github.com/xolox/vim-easytags'
-Bundle 'git://github.com/reedes/vim-colors-pencil'
-Bundle 'git://github.com/ciaranm/inkpot'
-Bundle 'git://github.com/w0ng/vim-hybrid'
+NeoBundle 'git://github.com/altercation/vim-colors-solarized.git'
+NeoBundle 'git://github.com/w0ng/vim-hybrid'
 
-Bundle 'git://github.com/chriskempson/base16-vim'
-Bundle 'git://github.com/doug/vimfiles'
+NeoBundle 'git://github.com/vim-scripts/Jinja'
+NeoBundle 'git://github.com/genoma/vim-less'
+NeoBundle 'git://github.com/hail2u/vim-css3-syntax'
+NeoBundle 'git://github.com/ekalinin/Dockerfile.vim'
+NeoBundle 'git://github.com/kchmck/vim-coffee-script'
+NeoBundle 'git://github.com/fatih/vim-go'
+
+NeoBundle 'git://github.com/xolox/vim-misc'
+NeoBundle 'git://github.com/xolox/vim-easytags'
+
+NeoBundle 'git://github.com/scrooloose/syntastic'
+
+call neobundle#end()
 
 filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
 
 retab
 syntax on
@@ -62,7 +85,7 @@ set fencs=utf8,koi8-r,cp1251 " порядок перебора кодирово�
 set nobackup    " не создавать бэкап
 set hidden      " переключаем измененные буферы без предварительного сохранения
 set wildmenu    " используем допол
-set noswapfile  " не используем swap файлы, чтобы н езасорять память
+set noswapfile  " не используем swap файлы, чтобы не засорять память
 set ignorecase  " игнорируем регистр
 set smartcase   " при ignorecase позволяет искать с буквами верхнего регистра
 set ttyfast     " перерисовываем терминальное окно быстрее
@@ -70,7 +93,7 @@ set autochdir   " изменять текущую директорию на ди
 
 set undolevels  =100
 set wildmode    =longest,list,full
-set wildignore  =*.o,*.obj,*.bak,*.exe,*.swp,*.a,*.svn,*.git,*.pyc
+set wildignore  =*.o,*.obj,*.bak,*.exe,*.swp,*.a,*.svn,*.git,*.hg,*.pyc,*.pyo
 set backspace   =indent,eol,start whichwrap+=<,>,[,] " use backspace instead of "x"
 set laststatus  =2        " всегда отображать линию статуса
 set history     =500      " сохраняем 500 линий поисковой истории
@@ -126,6 +149,7 @@ set softtabstop =4  " сколько провелов в табе (при наж
 set tabstop     =4  " ширина таба 4 пробела
 set shiftwidth  =4  " кол-во пробелов при отступах в 'cindent', >>, <<, и т.д.
 set textwidth   =78 " ширина текстовой строки
+set shiftround      " округлять отступы кратно 'shiftwidth'
 
 set complete   -=i  " не искать по подключенным заголовкам
 
@@ -133,7 +157,7 @@ if has("gui_running")
     set guioptions =afgitef
     "set guifont    =Andale\ Mono\ Italic\ 11
     "set guifont    =Andale\ Mono\ for\ Powerline\ 11
-    set guifont    =Mensch\ for\ Powerline\ 11
+    set guifont    =Droid\ Sans\ Mono\ Regular\ 13
 
     set background =dark
     "colorscheme festoon
@@ -141,8 +165,9 @@ else
     "colorscheme desert
 endif
 
-"set bg=dark
-colorscheme Snappy
+set bg=light
+colorscheme solarized
+colorscheme hybrid
 
 " удаление лишних пробелов перед сохранением файла
 au BufWritePre,FileWritePre * let au_line=line(".")
@@ -156,10 +181,10 @@ au BufEnter *.htaccess set nowrap
 
 "autocmd VimLeave * echo "Cya in Hell."
 
-au BufNewFile  *.pl    0r /home/delphi/.vim/templates/perl
-au BufNewFile  *.tex   0r /home/delphi/.vim/templates/tex
-au BufNewFile  *.py    0r /home/delphi/.vim/templates/python
-au BufNewFile  *.c     0r /home/delphi/.vim/templates/c
+au BufNewFile  *.pl    0r $HOME/.vim/templates/perl
+au BufNewFile  *.tex   0r $HOME/.vim/templates/tex
+au BufNewFile  *.py    0r $HOME/.vim/templates/python
+au BufNewFile  *.c     0r $HOME/.vim/templates/c
 
 au BufRead,BufNewFile  *.c,*.h set formatoptions=ql cindent
 
@@ -183,7 +208,7 @@ au BufEnter *.[ch] nmap ,h :find %:t:r.h<cr>
 
 let python_highlight_all=1
 
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+" nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 menu Encoding.koi8-r       :e ++enc=koi8-r<CR>
 menu Encoding.windows-1251 :e ++enc=cp1251<CR>
@@ -219,8 +244,8 @@ imap <Home> <C-o><Home><C-o>i
 imap <End> <C-o><End><C-o>a<C-o>a
 
 " сохранение текущего буфера
-imap <unique> <C-S> <Esc>:w<CR>a
-nmap <unique> <C-S>      :w<CR>
+" imap <unique> <C-S> <Esc>:w<CR>a
+" nmap <unique> <C-S>      :w<CR>
 
 " закрываем текущий буфер, не закрывая окна
 imap <F4> <Esc>:BD<CR>a
@@ -238,7 +263,7 @@ let g:qb_hotkey = "<F10>"    " запускаем quickbuf по 'F10'
 nnoremap <silent> <F8> :TagbarToggle<CR>
 let g:TagmaBufMgrMapCArrow = 0
 
-function! MakeTags(dir, tagfile)
+function! MakeTags0(dir, tagfile)
     let cmd = 'ctags -R --tag-relative=yes -f ' . a:tagfile . ' ' . a:dir
     echo 'run ' . cmd
     let x = system(cmd)
@@ -261,6 +286,12 @@ let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
 let g:signify_disable_by_default = 1
+
+" let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|collected_static|node_modules)|*.jst$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|collected_static|node_modules)$',
+  \ 'file': '\v\.(exe|so|dll|jst)$',
+  \ }
 
 nmap <silent> <C-B> :CtrlPBuffer<CR>
 imap <silent> <C-B> <Esc>:CtrlPBuffer<CR>
@@ -285,14 +316,52 @@ if $TERM =~ '^screen-256color'
     map! <Esc>OF <End>
 endif
 
+nmap s <Plug>(easymotion-s)
+
 autocmd FileType python let b:easytags_auto_highlight = 0
-if getcwd() =~ "git/"
+if getcwd() =~ "git/" || getcwd() =~ "hg/bidswitch.new/"
     let g:easytags_autorecurse = 1
 endif
 let g:easytags_by_filetype = $HOME."/.tags"
+let g:easytags_async = 1
+let g:diminactive_use_syntax = 0
+
+let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+let g:ycm_complete_in_comments = 1 " Completion in comments
+let g:ycm_complete_in_strings = 1 " Completion in string
+
+let g:syntastic_python_checkers = ['pep8', 'pyflakes']
 
 source $HOME/.vim/settings/binary.vim
 source $HOME/.vim/settings/latex.vim
 source $HOME/.vim/settings/perl.vim
 source $HOME/.vim/settings/python.vim
 source $HOME/.vim/settings/mako.vim
+
+autocmd BufEnter *.html,*.htm set tw=0 nowrap
+
+if has('python')
+" Add the virtualenv's site-packages to vim path
+python << EOF
+import os
+import sys
+
+projects = [os.path.join(os.environ['HOME'], 'hg', 'bidswitch'),]
+
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+
+def _make_python_tags():
+    outfile = os.path.join(os.environ['HOME'], '.tags', 'python')
+    os.system('ctags --python-kinds=-i -o {} '.format(outfile) +
+              '$(find {} -type f -name "*.py" 2>/dev/null) '.format(' '.join(sys.path + projects)) +
+              '2>/dev/null')
+EOF
+
+command -nargs=* MakeTags :python _make_python_tags()
+endif
