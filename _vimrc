@@ -24,11 +24,11 @@ NeoBundle 'Shougo/vimproc.vim', {
           \    },
           \ }
 
-NeoBundle 'git://github.com/mileszs/ack.vim'
-NeoBundle 'git://github.com/itchyny/lightline.vim'
-NeoBundle 'git://github.com/tpope/vim-commentary'
-NeoBundle 'git://github.com/edsono/vim-matchit'
-NeoBundle 'git://github.com/Lokaltog/vim-easymotion'
+NeoBundle 'mileszs/ack.vim'
+NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'tpope/vim-commentary'
+NeoBundle 'edsono/vim-matchit'
+NeoBundle 'Lokaltog/vim-easymotion'
 
 NeoBundle 'Valloric/YouCompleteMe', {
     \ 'build' : {
@@ -40,35 +40,35 @@ NeoBundle 'Valloric/YouCompleteMe', {
     \    },
     \ }
 
-NeoBundle 'git://github.com/tpope/vim-fugitive'
-NeoBundle 'git://github.com/gregsexton/gitv'
-NeoBundle 'git://github.com/vim-scripts/vcscommand.vim'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'gregsexton/gitv'
+NeoBundle 'vim-scripts/vcscommand.vim'
 
-NeoBundle 'git://github.com/kien/ctrlp.vim'
-NeoBundle 'git://github.com/majutsushi/tagbar'
-NeoBundle 'git://github.com/vim-scripts/taglist.vim'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'vim-scripts/taglist.vim'
 
-NeoBundle 'git://github.com/scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdtree'
 
-NeoBundle 'git://github.com/sjl/gundo.vim'
-NeoBundle 'git://github.com/vim-scripts/bufkill.vim'
-NeoBundle 'git://github.com/tpope/vim-surround.git'
-NeoBundle 'git://github.com/tpope/vim-obsession'
+NeoBundle 'sjl/gundo.vim'
+NeoBundle 'vim-scripts/bufkill.vim'
+NeoBundle 'tpope/vim-surround.git'
+NeoBundle 'tpope/vim-obsession'
 
-NeoBundle 'git://github.com/altercation/vim-colors-solarized.git'
-NeoBundle 'git://github.com/w0ng/vim-hybrid'
+NeoBundle 'altercation/vim-colors-solarized.git'
+NeoBundle 'w0ng/vim-hybrid'
 
-NeoBundle 'git://github.com/vim-scripts/Jinja'
-NeoBundle 'git://github.com/genoma/vim-less'
-NeoBundle 'git://github.com/hail2u/vim-css3-syntax'
-NeoBundle 'git://github.com/ekalinin/Dockerfile.vim'
-NeoBundle 'git://github.com/kchmck/vim-coffee-script'
-NeoBundle 'git://github.com/fatih/vim-go'
+NeoBundle 'vim-scripts/Jinja'
+NeoBundle 'genoma/vim-less'
+NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'ekalinin/Dockerfile.vim'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'fatih/vim-go'
 
-NeoBundle 'git://github.com/xolox/vim-misc'
-NeoBundle 'git://github.com/xolox/vim-easytags'
+NeoBundle 'xolox/vim-misc'
+NeoBundle 'xolox/vim-easytags'
 
-NeoBundle 'git://github.com/scrooloose/syntastic'
+NeoBundle 'scrooloose/syntastic'
 
 call neobundle#end()
 
@@ -165,8 +165,8 @@ else
     "colorscheme desert
 endif
 
-set bg=light
-colorscheme solarized
+set bg=dark
+"colorscheme solarized
 colorscheme hybrid
 
 " удаление лишних пробелов перед сохранением файла
@@ -331,6 +331,7 @@ let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
 let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
 let g:ycm_complete_in_comments = 1 " Completion in comments
 let g:ycm_complete_in_strings = 1 " Completion in string
+let g:ycm_path_to_python_interpreter = '/usr/bin/python' " be sure python is 2.x (YCM works only with 2.x)
 
 let g:syntastic_python_checkers = ['pep8', 'pyflakes']
 
