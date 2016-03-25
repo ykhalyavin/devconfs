@@ -1,0 +1,19 @@
+function myinit {
+    if [[ "$PWD" =~ "hg/bidswitch" && ! "$VIRTUAL_ENV" =~ "/bswui" ]]; then
+        workon bswui
+        export PYTHONPATH=/home/ykhalyavin/hg/bidswitch
+        export DJANGO_SETTINGS_MODULE=bswui.settings.local
+    fi
+
+    if [[ "$PWD" =~ "git/vtime" && ! "$VIRTUAL_ENV" =~ "/vtime" ]]; then
+        workon vtime
+        export PYTHONPATH=/home/ykhalyavin/git/vtime
+        export DJANGO_SETTINGS_MODULE=vtime.settings.base
+    fi
+}
+
+myinit
+
+function chpwd {
+    myinit
+}

@@ -299,11 +299,6 @@ stty -ixon
 #bindkey "^[[A" history-search-backward
 #bindkey "^[[B" history-search-forward
 
-[[ -e "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
-[[ -e "$HOME/.dir_colors" ]] && eval $(dircolors -b $HOME/.dir_colors)
 [[ -e "/usr/share/virtualenvwrapper/virtualenvwrapper.sh" ]] && source "/usr/share/virtualenvwrapper/virtualenvwrapper.sh"
-if [ -n "$VIRTUAL_ENV" ]; then
-      . "$VIRTUAL_ENV/bin/activate"
-else
-    workon python3.4
-fi
+[[ -e "$HOME/.dir_colors" ]] && eval $(dircolors -b $HOME/.dir_colors)
+[[ -e "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
